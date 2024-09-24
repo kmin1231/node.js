@@ -1,0 +1,12 @@
+{
+  "name": "ch03_simple_server",
+  "version": "1.0.0",
+  "description": "simple server example",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "nodemon index.js"  
+  },
+  "author": "min",
+  "license": "ISC"
+}
