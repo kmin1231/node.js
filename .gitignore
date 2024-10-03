@@ -1,8 +1,4 @@
 node_modules/
 .env
-<<<<<<< HEAD
 .vscode/
 Thumbs.db
-=======
-Thumbs.db
->>>>>>> 7bd5a3dc7cb0aafadccccebc024296ba29f629ac
