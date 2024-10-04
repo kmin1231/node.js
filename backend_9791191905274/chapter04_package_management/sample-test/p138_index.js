@@ -1,7 +1,7 @@
 // p138_index.js
 
 const calc = require("chapter04_package_management");
-// const calc = require("chapter04_package_management");
+// const calc = require("sample-package");
 
 const a = 17;
 const b = 3;
