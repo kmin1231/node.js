@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "chapter04_package_management": "file:backend_9791191905274/chapter04_package_management/sample-package",
     "express": "^4.21.0",
     "nodemon": "^3.1.7"
   }
