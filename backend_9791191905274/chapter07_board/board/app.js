@@ -14,7 +14,7 @@ app.set("view engine", "handlebars");
 app.set("views", __dirname + "/views");
 
 app.get("/", (req, res) => {
-    res.render("home", { title: "hello", message: "nice to meet you!" });
+    res.render("home", { title: "test board" });
 });
 
 app.listen(3000);
