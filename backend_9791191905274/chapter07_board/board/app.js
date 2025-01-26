@@ -17,4 +17,8 @@ app.get("/", (req, res) => {
     res.render("home", { title: "test board" });
 });
 
+app.get("/write", (req, res) => {
+    res.render("write", { title: "test board" })
+});
+
 app.listen(3000);

@@ -1,0 +1,33 @@
+{{!-- write.handlebars --}}
+
+<h1>[{{ title }}] Write a post</h1>
+
+<div>
+    <form name="boardForm" method="post" action="/write">
+        <div>
+            <label>Title</label>
+            <input type="text" name="title" placeholder="Enter a title" value="" />
+        </div>
+
+        <div>
+            <label>Author</label>
+            <input type="text" name="writer" placeholder="Enter your name" value="" />
+        </div>
+
+        <div>
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter your password" />
+        </div>
+
+        <div>
+            <label>Write the text</label><br />
+            <textarea placeholder="text" name="content" cols="50" row="10"></textarea>
+            <br />
+        </div>
+
+        <div>
+            <button type="submit">Submit</button>
+            <button type="button" onclick="location.href='/'">Cancel</button>
+        </div>
+    </form>
+</div>
