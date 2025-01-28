@@ -6,11 +6,14 @@ const req = require("express/lib/request");
 
 const mongodbConnection = require("./configs/mongodb-connection");
 
+const hbsHelpers = require("./configs/handlebars-helpers");
+
 const app = express();
 
 app.engine("handlebars", handlebars.engine({
     layoutsDir: __dirname + "/views",
-    defaultLayout: 'main'
+    defaultLayout: 'main',
+    helpers: hbsHelpers,
 }))
 
 app.set("view engine", "handlebars");
@@ -61,4 +64,10 @@ app.listen(3000, async () => {
     ];
 
     collection.insertMany(testData)
+
+    // test helper function
+    console.log(hbsHelpers.lengthOfList([1, 2, 3, "a"]));
+    console.log(hbsHelpers.eq(5, 5));
+    console.log(hbsHelpers.eq(2, 3));
+    console.log(hbsHelpers.dateString("2025-01-01T00:00:00Z"));
 });
