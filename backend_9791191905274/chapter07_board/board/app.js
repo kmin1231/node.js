@@ -2,6 +2,7 @@
 
 const express = require("express");
 const handlebars = require("express-handlebars");
+const req = require("express/lib/request");
 
 const app = express();
 
@@ -19,6 +20,12 @@ app.get("/", (req, res) => {
 
 app.get("/write", (req, res) => {
     res.render("write", { title: "test board" })
+});
+
+app.get("/detail/:id", async (req, res) => {
+    res.render("detail", {
+        title: "Test Board",
+    });
 });
 
 app.listen(3000);

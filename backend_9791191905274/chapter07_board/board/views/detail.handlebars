@@ -1,0 +1,59 @@
+{{!-- detail.handlebars --}}
+
+<h1>{{title}}</h1>
+<h2 class="text-xl">This is the title.</h2>
+<div>
+    Author: <b>Author Name</b>
+</div>
+
+<div>
+    Views: 9999 | Dates Posted: 2024-09-01 00:00:00
+    <button onclick="modifyPost()">Edit</button>
+    <button onclick="deletePost()">Delete</button>
+</div>
+
+<div>
+    <pre>This is the text body.</pre>
+</div>
+
+<section>
+    <div>
+        <h3>3 comments</h3>
+    </div>
+
+    <form method="post" action="/write-comment">
+        <div>
+            <div>
+                <input type="text" name="name" placeholder="Name" />
+                <input type="password" name="password" placeholder="Password" />
+            </div>
+
+            <div>
+                <textarea cols="40" rows="3" name="comment" placeholder="Write your comment"></textarea>
+                <br /><br /><button>Add comment</button>
+            </div>
+        </div>
+    </form>
+</section>
+
+<section>
+    <div>
+        <div>
+            Author: <b>Comment writer</b>
+        </div>
+        <div>
+            Date Posted: 2024-09-01 00:00:00
+            <button onclick="deleteComment('1')">Delete</button>
+        </div>
+    </div>
+
+    <div>
+        <pre>{{comment}}</pre>
+    </div>
+</section>
+
+<footer>
+    <div>
+        <a href="/">Back to list</a>
+    </div>
+</footer>
