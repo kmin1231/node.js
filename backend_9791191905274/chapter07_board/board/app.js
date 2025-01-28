@@ -63,11 +63,11 @@ app.listen(3000, async () => {
         }
     ];
 
-    collection.insertMany(testData)
+    // collection.insertMany(testData)
 
     // test helper function
-    console.log(hbsHelpers.lengthOfList([1, 2, 3, "a"]));
-    console.log(hbsHelpers.eq(5, 5));
-    console.log(hbsHelpers.eq(2, 3));
-    console.log(hbsHelpers.dateString("2025-01-01T00:00:00Z"));
+    // console.log(hbsHelpers.lengthOfList([1, 2, 3, "a"]));
+    // console.log(hbsHelpers.eq(5, 5));
+    // console.log(hbsHelpers.eq(2, 3));
+    // console.log(hbsHelpers.dateString("2025-01-01T00:00:00Z"));
 });
