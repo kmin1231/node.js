@@ -9,6 +9,8 @@ const mongodbConnection = require("./configs/mongodb-connection");
 const hbsHelpers = require("./configs/handlebars-helpers");
 
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.engine("handlebars", handlebars.engine({
     layoutsDir: __dirname + "/views",
