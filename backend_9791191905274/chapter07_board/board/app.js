@@ -8,6 +8,8 @@ const mongodbConnection = require("./configs/mongodb-connection");
 
 const hbsHelpers = require("./configs/handlebars-helpers");
 
+const postService = require("./services/post-service");
+
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -27,6 +29,12 @@ app.get("/", (req, res) => {
 
 app.get("/write", (req, res) => {
     res.render("write", { title: "test board" })
+});
+
+app.post("/write", async (req, res) => {
+    const post = req.body;
+    const result = await postService.writePost(collection, post);
+    res.redirect(`/detail/${result.insertedId}`);
 });
 
 app.get("/detail/:id", async (req, res) => {
