@@ -3,22 +3,22 @@
 <h1>{{title}}</h1>
 <h2 class="text-xl">This is the title.</h2>
 <div>
-    Author: <b>Author Name</b>
+    Author: <b>{{writer}}</b>
 </div>
 
 <div>
-    Views: 9999 | Dates Posted: 2024-09-01 00:00:00
+    Views: {{hits}} | Dates Posted: {{dateString createdDt}}
     <button onclick="modifyPost()">Edit</button>
     <button onclick="deletePost()">Delete</button>
 </div>
 
 <div>
-    <pre>This is the text body.</pre>
+    <pre>{{content}}</pre>
 </div>
 
 <section>
     <div>
-        <h3>3 comments</h3>
+        <h3>{{lengthOfList comments}} comments</h3>
     </div>
 
     <form method="post" action="/write-comment">
