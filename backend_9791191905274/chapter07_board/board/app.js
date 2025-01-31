@@ -23,8 +23,17 @@ app.engine("handlebars", handlebars.engine({
 app.set("view engine", "handlebars");
 app.set("views", __dirname + "/views");
 
-app.get("/", (req, res) => {
-    res.render("home", { title: "test board" });
+app.get("/", async (req, res) => {
+    const page = parseInt(req.query.page) || 1;     // page '1' by default
+    const search = req.query.search || "";          // search word
+    
+    try {
+        const [posts, paginator] = await postService.list(collection, page, search);
+        res.render("home", { title: "test board", search, paginator, posts });
+    } catch (error) {
+        console.error(error);
+        res.render("home", { title: "test board" });
+    }
 });
 
 app.get("/write", (req, res) => {
