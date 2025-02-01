@@ -1,7 +1,8 @@
 {{!-- detail.handlebars --}}
 
 <h1>{{title}}</h1>
-<h2 class="text-xl">This is the title.</h2>
+{{#with post}}
+<h2 class="text-xl">{{title}}</h2>
 <div>
     Author: <b>{{writer}}</b>
 </div>
@@ -51,9 +52,15 @@
         <pre>{{comment}}</pre>
     </div>
 </section>
+{{/with}}
 
 <footer>
     <div>
         <a href="/">Back to list</a>
     </div>
 </footer>
+
+<script>
+    async function modifyPost() { }
+    async function deletePost() { }
+</script>
