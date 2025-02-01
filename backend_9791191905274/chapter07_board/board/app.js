@@ -47,8 +47,10 @@ app.post("/write", async (req, res) => {
 });
 
 app.get("/detail/:id", async (req, res) => {
+    const result = await postService.getDetailPost(collection, req.params.id);
     res.render("detail", {
         title: "Test Board",
+        post: result.value,
     });
 });
 
