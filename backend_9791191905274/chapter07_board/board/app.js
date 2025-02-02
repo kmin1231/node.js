@@ -54,6 +54,18 @@ app.get("/detail/:id", async (req, res) => {
     });
 });
 
+app.post("/check-password", async (req, res) => {
+    const { id, password } = req.body;
+
+    const post = await postService.getPostByIdAndPassword(collection, { id, password });
+
+    if (!post) {
+        return res.status(404).json({ isExist: false });
+    } else {
+        return res.jsoon({ isExist: true });
+    }
+});
+
 
 let collection;
 
