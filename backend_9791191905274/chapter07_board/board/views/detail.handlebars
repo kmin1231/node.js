@@ -61,6 +61,32 @@
 </footer>
 
 <script>
-    async function modifyPost() { }
+    const postOption = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }
+
+    async function modifyPost() {
+        const password = prompt("Enter your password");
+        if (!password) {
+            return;
+        }
+
+        const result = await fetch("/check-password", {
+            ...postOption,
+            body: JSON.stringify({ id: "{{post._id}}", password })
+        });
+
+        const data = await result.json();
+
+        if (data.Exist) {
+            document.location = "/modify/{{post._id}}"
+        } else {
+            alert("The password is incorrect!");
+        }
+    }
+    
     async function deletePost() { }
 </script>
