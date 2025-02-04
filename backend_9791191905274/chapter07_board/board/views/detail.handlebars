@@ -23,6 +23,8 @@
     </div>
 
     <form method="post" action="/write-comment">
+        <input type="hidden" name="id" value="{{_id}}" />
+
         <div>
             <div>
                 <input type="text" name="name" placeholder="Name" />
@@ -38,19 +40,21 @@
 </section>
 
 <section>
+    {{#each comments}}
     <div>
         <div>
-            Author: <b>Comment writer</b>
+            Author: <b>{{name}}</b>
         </div>
         <div>
-            Date Posted: 2024-09-01 00:00:00
-            <button onclick="deleteComment('1')">Delete</button>
+            Date Posted: {{dateString createdDt}}
+            <button onclick="deleteComment('{{idx}}')">Delete</button>
         </div>
     </div>
 
     <div>
         <pre>{{comment}}</pre>
     </div>
+    {{/each}}
 </section>
 {{/with}}
 
