@@ -83,7 +83,7 @@ app.post("/modify/", async (req, res) => {
         createdDt: new Date().toISOString(),
     };
 
-    const result = postService.updatePost(collection, id, post);
+    const result = await postService.updatePost(collection, id, post);
     res.redirect(`/detail/${id}`);
 });
 

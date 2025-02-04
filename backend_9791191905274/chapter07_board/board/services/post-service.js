@@ -48,8 +48,10 @@ async function updatePost(collection, id, post) {
             ...post,
         },
     };
-    return await collection.updateOne({ _id: ObjectId(id) }, toUpdatePost);
+
+    return await collection.updateOne({ _id: new ObjectId(id) }, toUpdatePost);
 }
+
 
 module.exports = {
     list,
