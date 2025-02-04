@@ -120,4 +120,27 @@
 
         document.location = "/";
     }
+
+
+    async function deleteComment(idx) {
+        const password = prompt("Enter the password to delete.");
+
+        if (!password) {
+            return;
+        }
+        
+        const result = await fetch("/delete-comment", {
+            ...deleteOption,
+            body: JSON.stringify({ id: "{{post._id}}", idx, password })
+        });
+
+        const data = await result.json();
+        if (!data.isSuccess) {
+            alert("Deletion failed. Please check the password!");
+            return;
+        }
+
+        alert("Successfully deleted!");
+        document.location.reload();
+    }
 </script>
