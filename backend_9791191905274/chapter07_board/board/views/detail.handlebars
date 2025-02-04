@@ -81,7 +81,7 @@
 
         const data = await result.json();
 
-        if (data.Exist) {
+        if (data.isExist) {
             document.location = "/modify/{{post._id}}"
         } else {
             alert("The password is incorrect!");

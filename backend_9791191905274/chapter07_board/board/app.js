@@ -62,7 +62,7 @@ app.post("/check-password", async (req, res) => {
     if (!post) {
         return res.status(404).json({ isExist: false });
     } else {
-        return res.jsoon({ isExist: true });
+        return res.json({ isExist: true });
     }
 });
 
