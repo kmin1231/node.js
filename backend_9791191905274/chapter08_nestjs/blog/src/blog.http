@@ -1,0 +1,36 @@
+# test with 'REST Client'
+
+@server = http://localhost:3000
+
+### fetch all posts
+GET {{server}}/blog
+
+
+### create a post
+POST {{server}}/blog
+Content-Type: application/json
+
+{
+    "title": "Hello!",
+    "content": "Nice to meet you.",
+    "name": "original name"
+}
+
+
+### fetch a post
+GET {{server}}/blog/1
+
+
+### delete a post
+DELETE {{server}}/blog/2
+
+
+### update a post
+PUT {{server}}/blog/1
+Content-Type: application/json
+
+{
+    "title": "upating a post",
+    "content": "modifying post content",
+    "name": "updated name"
+}
