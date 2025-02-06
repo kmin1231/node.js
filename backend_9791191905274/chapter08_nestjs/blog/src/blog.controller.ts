@@ -3,32 +3,40 @@ import { BlogService } from './blog.service';
 
 @Controller("blog")
 export class BlogController {
-  constructor(private readonly appService: BlogService) {}
+  blogService: BlogService;
+  constructor() {
+    this.blogService = new BlogService();
+  }
 
   @Get()
   getAllPosts() {
     console.log('Fetching all posts');
+    return this.blogService.getAllPosts();
   }
 
   @Post()
-  createPost(@Body() post: any) {
+  createPost(@Body() postDto) {
     console.log('Creating a post');
-    console.log(post);
+    this.blogService.createPost(postDto);
+    return 'success';
   }
 
   @Get('/:id')
   getPost(@Param('id') id: string) {
     console.log(`[id: ${id}] Fetching a single post`);
+    return this.blogService.getPost(id);
   }
 
   @Delete('/:id')
-  deletePost() {
+  deletePost(@Param('id') id: string) {
     console.log('Deleting a post');
+    this.blogService.delete(id);
+    return 'success';
   }
 
   @Put('/:id')
-  updatePost(@Param('id') id, @Body() post: any) {
-    console.log(`[${id}] Updating a post`);
-    console.log(post);
+  updatePost(@Param('id') id, @Body() postDto) {
+    console.log('Updating a post', id, postDto);
+    return this.blogService.updatePost(id, postDto);
   }
 }
