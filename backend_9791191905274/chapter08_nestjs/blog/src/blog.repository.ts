@@ -1,6 +1,5 @@
 import { readFile, writeFile } from 'fs/promises';
 import { PostDto } from './blog.model';
-import { write } from 'fs';
 
 export interface BlogRepository {
     getAllPost(): Promise<PostDto[]>;
