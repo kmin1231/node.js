@@ -22,9 +22,12 @@ export class BlogController {
   }
 
   @Get('/:id')
-  getPost(@Param('id') id: string) {
+  async getPost(@Param('id') id: string) {
     console.log(`[id: ${id}] Fetching a single post`);
-    return this.blogService.getPost(id);
+
+    const post = await this.blogService.getPost(id);
+    console.log(post);
+    return post;
   }
 
   @Delete('/:id')
