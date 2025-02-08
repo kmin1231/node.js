@@ -55,12 +55,16 @@ export class BlogFileRepository implements BlogRepository {
 export class BlogMongoRepository implements BlogRepository {
     constructor(@InjectModel(Blog.name) private blogModel: Model<BlogDocument>) { }
 
-    async getAllPost(): Promise<Blog[]> {
+    async getAllPost(): Promise<PostDto[]> {
         return await this.blogModel.find().exec();        
     }
 
     async createPost(postDto: PostDto) {
+        const lastPost = await this.blogModel.findOne().sort({ _id: -1 }).exec();
+        const newId = lastPost ? (parseInt(lastPost.id) + 1).toString() : "1";
+
         const createPost = {
+            id: newId,
             ...postDto,
             createdDt: new Date(),
             updatedDt: new Date(),
@@ -69,15 +73,15 @@ export class BlogMongoRepository implements BlogRepository {
     }
 
     async getPost(id: string): Promise<PostDto> {
-        return await this.blogModel.findById(id);
+        return await this.blogModel.findOne({ id }).exec();  
     }
 
     async deletePost(id: string) {
-        await this.blogModel.findByIdAndDelete(id);
+        await this.blogModel.findOneAndDelete({ id }).exec();  
     }
 
-    async updatePost(id: string, postDto: PostDto) {
+    async updatePost(id: String, postDto: PostDto) {
         const updatePost = { id, ...postDto, updatedDt: new Date() };
-        await this.blogModel.findByIdAndUpdate(id, updatePost);
+        await this.blogModel.findOneAndUpdate({ id }, updatePost).exec();
     }
 }
