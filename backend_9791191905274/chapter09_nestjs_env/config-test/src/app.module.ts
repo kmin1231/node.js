@@ -4,6 +4,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { WeatherModule } from './weather/weather.module';
 
+console.log('env: ' + process.env.NODE_ENV);
+
 @Module({
   imports: [ConfigModule.forRoot({ isGlobal: true }), WeatherModule],
   controllers: [AppController],
