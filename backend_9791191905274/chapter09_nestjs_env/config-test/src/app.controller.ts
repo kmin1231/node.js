@@ -39,4 +39,12 @@ export class AppController {
   }
 
   // http://localhost:3000/redis-info
+
+
+  @Get('server-url')
+  getServerUrl(): string {
+    return this.configService.get<string>('SERVER_URL')!;
+  }
+
+  // http://localhost:3000/server-url
 }
