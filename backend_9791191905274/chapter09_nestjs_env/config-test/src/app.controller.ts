@@ -32,4 +32,11 @@ export class AppController {
 
   // http://localhost:3000/db-info
   
+
+  @Get('redis-info')
+  getRedisInfo(): string {
+    return `${this.configService.get('redis.host')}:${this.configService.get('redis.port')}`;
+  }
+
+  // http://localhost:3000/redis-info
 }
