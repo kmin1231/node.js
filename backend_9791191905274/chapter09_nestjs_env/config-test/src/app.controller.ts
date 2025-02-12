@@ -21,4 +21,15 @@ export class AppController {
 
   // commands for testing: npm run start; npm run start:dev; npm run start:prod
   // http://localhost:3000/service-url
+
+
+  @Get('db-info')
+  getTest(): string {
+    console.log(this.configService.get('logLevel'));
+    console.log(this.configService.get('apiVersion'));
+    return this.configService.get('dbInfo')!;
+  }
+
+  // http://localhost:3000/db-info
+  
 }
