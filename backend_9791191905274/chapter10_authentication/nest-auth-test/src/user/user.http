@@ -26,3 +26,14 @@ content-type: application/json
 
 ### Delete User
 DELETE http://localhost:3000/user/delete/andy@podo.com
+
+
+### Negative Test Case
+POST http://localhost:3000/user/create
+content-type: application/json
+
+{
+    "username": "andy",
+    "password": "test1234",
+    "email": "andy-podo"
+}
