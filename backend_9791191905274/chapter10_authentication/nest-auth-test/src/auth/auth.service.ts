@@ -8,12 +8,28 @@ export class AuthService {
     constructor(private userService: UserService) {}
 
     async register(userDto: CreateUserDto) {
-        const user = await this.userService.getUser(userDto.email);
-        if (user) {
-            throw new HttpException (
-                'The user already exists!',
-                HttpStatus.BAD_REQUEST,
-            );
+
+        // const user = await this.userService.getUser(userDto.email);
+        // if (user) {
+        //     throw new HttpException (
+        //         'The user already exists!',
+        //         HttpStatus.BAD_REQUEST,
+        //     );
+        // }
+
+        // for exception handling, use 'let' instead of 'const'
+        let user;
+
+        // ensure that if an error occurs, 'user' is set to 'null' with try-catch block
+        try {
+            user = await this.userService.getUser(userDto.email);
+        } catch (error) {
+            user = null;
+        }
+
+        // ensure that the password is checked before proceeding with user registration
+        if (!userDto.password) {
+            throw new HttpException('Password is required', HttpStatus.BAD_REQUEST);
         }
 
         const encryptedPassword = bcrypt.hashSync(userDto.password, 10);
@@ -29,7 +45,8 @@ export class AuthService {
             const { password, ...userWithoutPassword } = newUser; 
             return userWithoutPassword;
         } catch (error) {
-            throw new HttpException('Server Error', 500);
+            console.error('User registration error:', error); 
+            throw new HttpException('Server Error', HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

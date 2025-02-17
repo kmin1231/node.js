@@ -23,7 +23,7 @@ export class UserService {
             throw new Error(`User with email ${email} not found`);
         }
 
-        return result;
+        return result || null;
     }
 
     async updateUser(email, _user) {
