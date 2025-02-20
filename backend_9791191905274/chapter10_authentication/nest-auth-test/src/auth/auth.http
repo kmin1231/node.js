@@ -1,5 +1,4 @@
 ### User Registration
-
 POST http://localhost:3000/auth/register
 content-type: application/json
 
@@ -13,6 +12,7 @@ content-type: application/json
 ### Login
 POST http://localhost:3000/auth/login
 content-type: application/json
+
 {
     "email": "andy1@podo.com",
     "password": "1234"
