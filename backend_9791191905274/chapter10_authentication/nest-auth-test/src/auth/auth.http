@@ -17,3 +17,17 @@ content-type: application/json
     "email": "andy1@podo.com",
     "password": "1234"
 }
+
+
+### Login2: LoginGuard
+POST http://localhost:3000/auth/login2
+content-type: application/json
+
+{
+    "email": "andy1@podo.com",
+    "password": "1234"
+}
+
+
+### Guard Test
+GET http://localhost:3000/auth/test-guard
