@@ -31,3 +31,27 @@ content-type: application/json
 
 ### Guard Test
 GET http://localhost:3000/auth/test-guard
+
+
+### Login3 -- with session
+POST http://localhost:3000/auth/login3
+content-type: application/json
+
+{
+    "email": "andy1@podo.com",
+    "password": "1234"
+}
+
+
+### Login3 -- negative test case
+POST http://localhost:3000/auth/login3
+content-type: application/json
+
+{
+    "email": "andy1@podo.com",
+    "password": "12345"
+}
+
+
+### Guard Test -- with session
+GET http://localhost:3000/auth/test-guard2
