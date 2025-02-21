@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post, Request, Response, UseGuards } from '@nestjs/common';
 import { CreateUserDto } from 'src/user/user.dto';
 import { AuthService } from './auth.service';
-import { LoginGuard } from './auth.guard';
+import { LoginGuard, AuthenticatedGuard, LocalAuthGuard } from './auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -45,4 +45,12 @@ export class AuthController {
     testGuard() {
         return 'This post is only visible when you are logged in.';
     }
+
+    @UseGuards(LocalAuthGuard)
+    @Post('login3')
+    login3(@Request() req) { return req.user; }
+
+    @UseGuards(AuthenticatedGuard)
+    @Get('test-guard2')
+    testGuardWithSession(@Request() req) { return req.user; }
 }
