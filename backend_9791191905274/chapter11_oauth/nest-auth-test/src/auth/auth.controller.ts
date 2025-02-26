@@ -56,12 +56,15 @@ export class AuthController {
 
     @Get('to-google')
     @UseGuards(GoogleAuthGuard)
-    async googleAuth(@Request() req) {}
+    async googleAuth(@Request() req, @Response() res) {
+        return res.redirect('/auth/google');
+    }
 
     @Get('google')
     @UseGuards(GoogleAuthGuard)
     async googleAuthRedirect(@Request() req, @Response() res) {
         const { user } = req;
+        console.log('Google callback received:', req.user);
         return res.send(user);
     }
 }

@@ -10,12 +10,13 @@ export class UserService {
     ) {}
 
     createUser(user): Promise<User> {
+        console.log('Creating user:', user); 
         return this.userRepository.save(user);
     }
 
-    async getUser(email: string) {
+    async getUser(email: string): Promise<User> {
         const result = await this.userRepository.findOne({
-            where: { email },
+            where: { email: email.toLowerCase() },
         });
 
         // exception handling to prevent null-related TypeError in 'updateUser'
@@ -23,11 +24,11 @@ export class UserService {
             throw new Error(`User with email ${email} not found`);
         }
 
-        return result || null;
+        return result;
     }
 
-    async updateUser(email, _user) {
-        const user: User = await this.getUser(email);
+    async updateUser(email: string, _user): Promise<void> {
+        let user: User = await this.getUser(email);
         console.log(_user);
         user.username = _user.username;
         user.password = _user.password;
@@ -37,5 +38,20 @@ export class UserService {
 
     deleteUser(email: any) {
         return this.userRepository.delete({ email });
+    }
+
+    async findByEmailOrSave( email, username, providerId): Promise<User> {
+        const foundUser = await this.getUser(email);
+
+        if (foundUser) { return foundUser; }
+
+        const newUser = await await this.createUser({
+            email: email.toLowerCase(),
+            username,
+            providerId,
+        });
+
+        console.log("New user created:", newUser);
+        return newUser;
     }
 }
