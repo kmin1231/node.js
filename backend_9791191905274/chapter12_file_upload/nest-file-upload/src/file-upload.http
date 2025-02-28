@@ -1,0 +1,21 @@
+POST http://localhost:3000/file-upload
+Content-Type: multipart/form-data; boundary=test-file-upload
+
+--test-file-upload
+Content-Disposition: form-data; name="file"; filename="test.txt"
+
+body of text file1
+body of text file2
+body of text file3
+--test-file-upload--
+
+
+### upload file
+POST http://localhost:3000/file-upload
+Content-Type: multipart/form-data; boundary=test-file-upload
+
+--test-file-upload
+Content-Disposition: form-data; name="file"; filename="test.txt"
+
+< test.txt
+--test-file-upload--
