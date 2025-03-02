@@ -1,0 +1,48 @@
+<style>
+    .message {
+      width: 300px;
+      color: #fff;
+      background-color: purple;
+      margin-top: 5px;
+      padding: 5px;
+    }
+  </style>
+  <body>
+    <textarea id="message" name="message" cols="50" rows="5"></textarea>
+    <br /><br />
+
+    <button onclick="sendMessage()">Send</button>
+    <button onclick="webSocketClose()">Close</button>
+    <div id="messages"></div>
+  </body>
+  
+  <script>
+    const ws = new WebSocket("ws://localhost:3000");
+
+    function sendMessage() {
+      ws.send(document.getElementById("message").value);
+    }
+  
+    function webSocketClose() {
+      console.log("Close button clicked!");
+      ws.close();
+    //   ws.close(1000, "Connection closed!");
+    }
+  
+    ws.onopen = function () {
+      console.log("Client connection established!");
+    };
+  
+    ws.onmessage = function (event) {
+      let message = event.data.replace(/(\r\n|\n|\r)/g, "<br />");
+      let el = document.createElement("div");
+      el.innerHTML = message;
+      el.className = "message";
+      document.getElementById("messages").append(el);
+    };
+  
+    ws.onclose = function (e) {
+      console.log("Closed!");
+      document.getElementById("messages").append("Server connection closed!");
+    };
+  </script>
