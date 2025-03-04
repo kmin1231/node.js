@@ -2,6 +2,7 @@ import {
     WebSocketGateway,
     WebSocketServer,
     SubscribeMessage,
+    MessageBody,
 } from '@nestjs/websockets';
 
 import { Server, Socket } from 'socket.io';
@@ -12,6 +13,9 @@ export class ChatGateway {
 
     @SubscribeMessage('message')
     handleMessage(socket: Socket, data: any): void {
-        this.server.emit('message', `client-${socket.id.substring(0, 4)} : ${data}`,);
+        const { message, nickname } = data;
+        console.log(data);
+        // this.server.emit('message', `client-${socket.id.substring(0, 4)} : ${data}`,);
+        socket.broadcast.emit('message', `${nickname}: ${message}`);
     }
 }
