@@ -19,3 +19,19 @@ export class ChatGateway {
         socket.broadcast.emit('message', `${nickname}: ${message}`);
     }
 }
+
+
+@WebSocketGateway({ namespace: 'room' })
+export class RoomGateway {
+    rooms = [] as string[];
+
+    @WebSocketServer()
+    server: Server;
+
+    @SubscribeMessage('createRoom')
+    handleMessage(@MessageBody() data) {
+        const { nickname, room } = data;
+        this.rooms.push(room);
+        this.server.emit('rooms', this.rooms);
+    }
+}
