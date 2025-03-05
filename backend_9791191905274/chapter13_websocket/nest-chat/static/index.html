@@ -6,11 +6,17 @@
     <title>Nest Chat</title>
 </head>
 <body>
-     <h2>Simple Nest Chat</h2>
+    <h2>Simple Nest Chat</h2>
+
+    <div>
+        <h2>Chat Room List</h2>
+        <ul id="rooms"></ul>
+    </div>
     <div id="chat"></div>
 
     <input type="text" id="message" placeholder="Please enter message.">
     <button onclick="sendMessage()">Send</button>
+    <button onclick="createRoom()">Create Room</button>
 </body>
 
      <script src="https://code.jquery.com/jquery-3.6.1.slim.js"></script>
