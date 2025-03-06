@@ -23,6 +23,8 @@ export class ChatGateway {
 
 @WebSocketGateway({ namespace: 'room' })
 export class RoomGateway {
+    constructor(private readonly chatGateway: ChatGateway) {}
+
     rooms = [] as string[];
 
     @WebSocketServer()
@@ -31,7 +33,25 @@ export class RoomGateway {
     @SubscribeMessage('createRoom')
     handleMessage(@MessageBody() data) {
         const { nickname, room } = data;
+
+        this.chatGateway.server.emit('notice', {
+            message: `User [${nickname}] created the room [${room}].`
+        });
+    
         this.rooms.push(room);
         this.server.emit('rooms', this.rooms);
     }
+    
+    
+    @SubscribeMessage('joinRoom')
+    handleJoinRoom(socket: Socket, data) {
+        const { nickname, room, toLeaveRoom } = data;
+        socket.leave(toLeaveRoom);
+        this.chatGateway.server.emit('notice', {
+            message: `User [${nickname}] joined the room [${room}].`
+        });
+        socket.join(room);
+    }
 }
+
+
