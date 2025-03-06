@@ -17,9 +17,18 @@
     <input type="text" id="message" placeholder="Please enter message.">
     <button onclick="sendMessage()">Send</button>
     <button onclick="createRoom()">Create Room</button>
-</body>
 
+    <div>
+        <h2>Notice</h2>
+        <div id="notice"></div>
+    </div>
+
+    <div>
+        <h2>Chat</h2>
+        <div id="chat"></div>
+    </div>
      <script src="https://code.jquery.com/jquery-3.6.1.slim.js"></script>
      <script src="http://localhost:3000/socket.io/socket.io.js"></script>
      <script src="http://localhost:3000/script.js"></script>
+    </body>
 </html>

@@ -24,6 +24,10 @@ function createRoom() {
     rooomSocket.emit('createRoom', { room, nickname });
 }
 
+socket.on('notice', (data) => {
+    $('#notice').append(`<div>${data.message}</div>`);
+})
+
 rooomSocket.on("rooms", (data) => {
     console.log(data);
     $('#rooms').empty();
@@ -31,3 +35,9 @@ rooomSocket.on("rooms", (data) => {
         $('#rooms').append(`<li>${room} <button onclick="joinRoom('${room}')">join</button></li>`);
     });
 });
+
+
+function joinRoom(room) {
+    rooomSocket.emit('joinRoom', { room, nickname, toLeaveRoom: currentRoom });
+    currentRoom = room;
+}
