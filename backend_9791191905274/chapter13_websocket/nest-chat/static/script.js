@@ -9,9 +9,16 @@ socket.on('connect', () => {
 });
 
 function sendMessage() {
+    if (currentRoom === '') {
+        alert('Please select a room.');
+        return;
+    }
     const message = $('#message').val();
+    const data = { message, nickname, room: currentRoom };
+    
     $('#chat').append(`<div>Me : ${message}</div>`)
-    socket.emit('message', { message, nickname });
+    socket.emit('message', data);
+    return false;
 }
 
 socket.on('message', (message) => {
@@ -28,6 +35,11 @@ socket.on('notice', (data) => {
     $('#notice').append(`<div>${data.message}</div>`);
 })
 
+rooomSocket.on('message', (data) => {
+    console.log(data);
+    $('#chat').append(`<div>${data.message}</div>`);
+});
+
 rooomSocket.on("rooms", (data) => {
     console.log(data);
     $('#rooms').empty();
@@ -39,5 +51,6 @@ rooomSocket.on("rooms", (data) => {
 
 function joinRoom(room) {
     rooomSocket.emit('joinRoom', { room, nickname, toLeaveRoom: currentRoom });
+    $('#chat').html('');
     currentRoom = room;
 }
