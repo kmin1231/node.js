@@ -47,10 +47,18 @@ export class RoomGateway {
     handleJoinRoom(socket: Socket, data) {
         const { nickname, room, toLeaveRoom } = data;
         socket.leave(toLeaveRoom);
+    
+        // if (toLeaveRoom) {
+        //     socket.leave(toLeaveRoom);
+        //     console.log(`Client left room: ${toLeaveRoom}`);
+        // }
+    
         this.chatGateway.server.emit('notice', {
             message: `User [${nickname}] joined the room [${room}].`
         });
         socket.join(room);
+        console.log(`Client joined room: ${room}`);
+        console.log('Current rooms:', socket.rooms);
     }
 
 
@@ -58,7 +66,7 @@ export class RoomGateway {
     handleMessageToRoom(socket: Socket, data) {
         const { nickname, room, message } = data;
         console.log(data);
-        socket.broadcast.to(room).emit('message', {
+        socket.to(room).emit('message', {
             message: `${nickname}: ${message}`,
         });
     }

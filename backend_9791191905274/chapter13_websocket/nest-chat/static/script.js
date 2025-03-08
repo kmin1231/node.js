@@ -1,5 +1,5 @@
 const socket = io('http://localhost:3000/chat');
-const rooomSocket = io('http://localhost:3000/room');
+const roomSocket = io('http://localhost:3000/room');
 const nickname = prompt('Please enter your nickname!');
 
 let currentRoom = '';
@@ -17,7 +17,7 @@ function sendMessage() {
     const data = { message, nickname, room: currentRoom };
     
     $('#chat').append(`<div>Me : ${message}</div>`)
-    socket.emit('message', data);
+    roomSocket.emit('message', data);
     return false;
 }
 
@@ -28,19 +28,19 @@ socket.on('message', (message) => {
 
 function createRoom() {
     const room = prompt('Please enter the name of the room to create!');
-    rooomSocket.emit('createRoom', { room, nickname });
+    roomSocket.emit('createRoom', { room, nickname });
 }
 
 socket.on('notice', (data) => {
     $('#notice').append(`<div>${data.message}</div>`);
 })
 
-rooomSocket.on('message', (data) => {
+roomSocket.on('message', (data) => {
     console.log(data);
     $('#chat').append(`<div>${data.message}</div>`);
 });
 
-rooomSocket.on("rooms", (data) => {
+roomSocket.on("rooms", (data) => {
     console.log(data);
     $('#rooms').empty();
     data.forEach((room) => {
@@ -50,7 +50,7 @@ rooomSocket.on("rooms", (data) => {
 
 
 function joinRoom(room) {
-    rooomSocket.emit('joinRoom', { room, nickname, toLeaveRoom: currentRoom });
+    roomSocket.emit('joinRoom', { room, nickname, toLeaveRoom: currentRoom });
     $('#chat').html('');
     currentRoom = room;
 }
